@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title data-site="title"></title>
+
+    <meta name="description" data-site="description" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:site_name" data-site="name" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" data-site="title" />
+    <meta property="og:description" data-site="description" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <script>
+      (function () {
+        var stored = null;
+
+        try {
+          stored = localStorage.getItem("theme");
+        } catch (e) {}
+
+        var prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+
+        var theme = stored || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="profile">
+        <a href="./" class="profile-link" aria-label="Home">
+          <img
+            class="profile-image"
+            width="776"
+            height="437"
+            data-site-src="image"
+            data-site-alt="imageAlt"
+          />
+        </a>
+
+        <div class="profile-about">
+          <h1 class="site-title" data-site="name"></h1>
+
+          <nav class="socials" aria-label="Social links">
+            <a
+              data-site-link="github"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+            >
+              <svg
+                class="social-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                />
+              </svg>
+            </a>
+
+            <a data-site-link="email" aria-label="Email">
+              <svg
+                class="social-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2-2z"
+                />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </a>
+          </nav>
+
+          <p class="profile-bio" data-site="bio"></p>
+
+          <button
+            type="button"
+            class="mode"
+            id="mode-switcher"
+            aria-label="Switch theme"
+            aria-pressed="false"
+          >
+            <span></span>
+          </button>
+        </div>
+      </header>
+
+      <main class="post-page" id="post-page">
+        <p class="notice">Loading post&hellip;</p>
+      </main>
+
+      <noscript>
+        <p class="notice">
+          This journal needs JavaScript enabled to display its posts.
+        </p>
+      </noscript>
+
+      <footer class="footer">
+        <span class="heart">&hearts;</span>
+        <span data-site="footer"></span>
+      </footer>
+    </div>
+
+    <script src="site.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

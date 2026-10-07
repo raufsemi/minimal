@@ -1,0 +1,33 @@
+content:
+  - name: posts
+    label: Posts
+    type: collection
+    path: blogs
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+
+    fields:
+      - name: title
+        label: Title
+        type: string
+
+      - name: date
+        label: Date
+        type: date
+
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+
+      - name: body
+        label: Content
+        type: rich-text
+        options:
+          format: markdown
+
+media:
+  - name: images
+    label: Images
+    input: blogs/images
+    output: /blogs/images

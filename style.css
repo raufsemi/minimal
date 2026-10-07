@@ -1,0 +1,546 @@
+/* =========================================================================
+   Journal — minimal, typography-first single-page blog
+   -------------------------------------------------------------------------
+   1. Theme variables (light / dark)
+   2. Base
+   3. Layout
+   4. Header / profile
+   5. Post header (date + share)
+   6. Post content
+   7. Tags + footer
+   8. Responsive
+   ========================================================================= */
+
+/* 1. Theme variables ----------------------------------------------------- */
+:root {
+  --bg: #ffffff;
+  --text: #1c1c1c;
+  --muted: #767676;
+  --rule: #e7e7e7;
+  --code-bg: #f4f4f4;
+  --mark: #ededed;
+  --row-bg: #fafafa;
+  --row-border: #252323;
+  --row-link: #1c1c1c;
+  --toggle-track: #e2e2e2;
+  --toggle-knob: #7d7d7d;
+  --content-width: 43rem;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #141414;
+  --text: #d8d8d8;
+  --muted: #8b8b8b;
+  --rule: #2b2b2b;
+  --code-bg: #1d1d1d;
+  --mark: #2a2a2a;
+  --row-bg: #161f29;
+  --row-border: #6a6a6a;
+  --row-link: #bfbfbf;
+  --toggle-track: #333333;
+  --toggle-knob: #cfcfcf;
+
+  color-scheme: dark;
+}
+
+/* 2. Base ---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--muted);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+::selection {
+  background: var(--mark);
+}
+
+/* 3. Layout -------------------------------------------------------------- */
+.container {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 64px 24px 0;
+}
+
+/* 4. Header / profile ---------------------------------------------------- */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 88px;
+}
+
+.profile-link {
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+
+.profile-image {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-about {
+  min-width: 0;
+}
+
+.site-title {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.site-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.socials a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.socials a:hover {
+  color: var(--text);
+}
+
+.social-icon {
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+
+.profile-bio {
+  margin: 0 0 14px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* Theme switch */
+.mode {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 9px;
+  background: var(--toggle-track);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mode span {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--toggle-knob);
+  transition: transform 0.18s ease;
+}
+
+.mode.active span {
+  transform: translateX(16px);
+}
+
+.mode:focus-visible {
+  outline: 2px solid var(--muted);
+  outline-offset: 3px;
+}
+
+/* 5. Post header (post page) --------------------------------------------- */
+.post-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  margin-bottom: 1.6rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.post-date {
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-share {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.post-share a,
+.post-share button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.post-share a:hover,
+.post-share button:hover {
+  color: var(--text);
+}
+
+.post-share .social-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* 6. Post content (post page) -------------------------------------------- */
+.blog-post-content h1 {
+  margin: 0 0 1.5rem;
+  font-size: 1.95rem;
+  font-weight: 700;
+  line-height: 1.24;
+  letter-spacing: -0.015em;
+}
+
+.blog-post-content p {
+  margin: 0 0 1.4rem;
+}
+
+.blog-post-content p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-post-content h3 {
+  margin: 2.6rem 0 0.9rem;
+  font-size: 1.22rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.blog-post-content h4 {
+  margin: 2rem 0 0.7rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+  margin: 0 0 1.4rem;
+  padding-left: 1.3rem;
+}
+
+.blog-post-content li {
+  margin-bottom: 0.4rem;
+}
+
+.blog-post-content li:last-child {
+  margin-bottom: 0;
+}
+
+.blog-post-content li::marker {
+  color: var(--muted);
+}
+
+.blog-post-content blockquote {
+  margin: 1.9rem 0;
+  padding-left: 1.15rem;
+  border-left: 2px solid var(--rule);
+  color: var(--muted);
+  font-style: italic;
+}
+
+.blog-post-content hr {
+  margin: 2.8rem 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.blog-post-content img {
+  border-radius: 4px;
+}
+
+.blog-post-content figure {
+  margin: 2rem 0;
+}
+
+.blog-post-content figure img {
+  width: 100%;
+}
+
+.blog-post-content figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.blog-post-content code {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.86em;
+}
+
+.blog-post-content p code,
+.blog-post-content li code {
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+  background: var(--code-bg);
+}
+
+.blog-post-content pre {
+  margin: 1.8rem 0;
+  padding: 1rem 1.15rem;
+  border-radius: 4px;
+  background: var(--code-bg);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  overflow-x: auto;
+}
+
+.blog-post-content pre code {
+  padding: 0;
+  background: none;
+  font-size: 1em;
+}
+
+/* 7. Index: post list + pagination (index.html) -------------------------- */
+/* One post per row: full width, title left (80%), date right (20%). */
+.post-list {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 10px;
+  margin-bottom: 7px;
+  background: var(--row-bg);
+  border: 1px dashed var(--row-border);
+}
+
+.post-list .post-title {
+  width: 80%;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--row-link);
+  text-decoration: none;
+}
+
+.post-list .post-title:hover {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+}
+
+.post-list .post-date {
+  width: 20%;
+  font-size: 0.78rem;
+  text-align: right;
+  color: var(--muted);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 3.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.pagination .next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.filter-note {
+  margin: 0 0 2rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.filter-note .post-tag {
+  text-decoration: none;
+}
+
+.notice {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.notice code {
+  font-size: 0.86em;
+}
+
+/* 8. Tags, navigation + footer ------------------------------------------- */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 2.2rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.post-tag {
+  text-decoration: none;
+}
+
+.post-tag::before {
+  content: "#";
+}
+
+.navigation {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 28px;
+  margin-top: 3.5rem;
+  font-size: 0.85rem;
+}
+
+.navigation .next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.footer {
+  padding: 3rem 0 4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer .heart {
+  color: #d64545;
+}
+
+/* 9. Responsive ---------------------------------------------------------- */
+@media (max-width: 640px) {
+  body {
+    font-size: 16.5px;
+    line-height: 1.72;
+  }
+
+  .container {
+    padding: 40px 20px 0;
+  }
+
+  .profile {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 60px;
+  }
+
+  .profile-image {
+    width: 84px;
+    height: 84px;
+  }
+
+  /* Keep title and date on one line, date pinned to the right. */
+  .post-list {
+    flex-wrap: nowrap;
+    align-items: baseline;
+    padding: 6px 10px;
+  }
+
+  .post-list .post-title {
+    flex: 1 1 auto;
+    width: auto;
+    font-size: 0.98rem;
+  }
+
+  .post-list .post-date {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .post-header {
+    margin-bottom: 1.3rem;
+  }
+
+  .blog-post-content h1 {
+    font-size: 1.55rem;
+  }
+
+  .navigation {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .navigation .next {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .blog-post-content h3 {
+    margin-top: 2.2rem;
+    font-size: 1.12rem;
+  }
+
+  .blog-post-content pre {
+    font-size: 0.78rem;
+  }
+
+  .footer {
+    padding: 2.5rem 0 3rem;
+  }
+}
